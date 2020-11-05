@@ -1,0 +1,46 @@
+﻿<Window x:Name="frmMain" x:Class="Gorgan_Sorana_Lab5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Gorgan_Sorana_Lab5"
+        mc:Ignorable="d" Height="450" Width="800" Title="Phone Subscribers Management" Loaded="frmMain_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="PhoneNumbersTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding Phonenum}" Grid.Column="0"/>
+                <TextBlock Text="{Binding Subscriber}" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+        <local:PhoneNumbersDataSet x:Key="phoneNumbersDataSet"/>
+        <CollectionViewSource x:Key="phoneNumbersViewSource" Source="{Binding PhoneNumbers,
+Source={StaticResource phoneNumbersDataSet}}"/>
+    </Window.Resources>
+    <Grid x:Name="grdMain" Margin="10,10,0,0" Loaded="grdMain_Loaded">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="26*"/>
+            <ColumnDefinition Width="98*"/>
+            <ColumnDefinition Width="105*"/>
+            <ColumnDefinition Width="571*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnNew" Content="New" Grid.Column="1" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Height="38" Width="96" Click="btnNew_Click"/>
+        <Button x:Name="btnEdit" Content="Edit" Grid.Column="1" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top" Width="96" Height="40" Click="btnEdit_Click"/>
+        <Button x:Name="btnDelete" Content="Delete" Grid.Column="1" HorizontalAlignment="Center" Margin="0,212,0,0" VerticalAlignment="Top" RenderTransformOrigin="-6.742,3.343" Height="35" Width="97" Click="btnDelete_Click"/>
+        <Button x:Name="btnExit" Content="Exit" Grid.Column="1" HorizontalAlignment="Center" Margin="0,311,0,0" VerticalAlignment="Top" Height="52" Width="77" FontWeight="Bold" Click="btnExit_Click"/>
+        <Button x:Name="btnSave" Content="Save" Grid.Column="3" HorizontalAlignment="Left" Margin="88,390,0,0" VerticalAlignment="Top" Height="21" Width="63" IsEnabled="False" Click="btnSave_Click"/>
+        <Button x:Name="btnCancel" Content="Cancel" Grid.Column="3" HorizontalAlignment="Left" Margin="362,390,0,0" VerticalAlignment="Top" Height="21" Width="55" IsEnabled="False" Click="btnCancel_Click"/>
+        <ListBox x:Name="lstPhones" Grid.Column="2" Margin="104,58,32,150" Grid.ColumnSpan="2" ItemsSource="{Binding}"
+IsSynchronizedWithCurrentItem="True" ItemTemplate="{StaticResource ResourceKey=PhoneNumbersTemplate}"/>
+        <Button x:Name="btnNext" Content="Next" Grid.Column="3" HorizontalAlignment="Left" Margin="458,279,0,0" VerticalAlignment="Top" Height="25" Width="74" Click="btnNext_Click" />
+        <Button x:Name="btnPrevious" Content="Previous" Grid.Column="2" HorizontalAlignment="Left" Margin="104,279,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="25" Width="76" Click="btnPrevious_Click"/>
+        <Label x:Name="lblPhoneNum_" Content="Phone Number:" RenderTransformOrigin="0.491,0.485" Grid.Column="2" Margin="104,319,468,79" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblSubscriber" Content="Subscriber: " Grid.Column="2" HorizontalAlignment="Left" Margin="104,350,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="76"/>
+        <TextBox x:Name="txtPhoneNumber" Grid.Column="3" HorizontalAlignment="Left" Margin="162,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Height="22" IsEnabled="False" Text="{Binding Path=Phonenum}"/>
+        <TextBox x:Name="txtSubscriber" Grid.Column="3" HorizontalAlignment="Left" Margin="162,354,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" Height="22" IsEnabled="False" Text="{Binding Path=Subscriber}"/>
+
+    </Grid>
+</Window>
